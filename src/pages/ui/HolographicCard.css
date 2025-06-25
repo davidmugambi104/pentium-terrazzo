@@ -1,0 +1,43 @@
+.holographic-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.holographic-card:hover {
+  transform: translateY(-5px);
+}
+
+.holographic-effect {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: radial-gradient(
+    circle at calc(var(--mouse-x, 0.5) * 100%) calc(var(--mouse-y, 0.5) * 100%),
+    rgba(255,0,140,0.2),
+    rgba(144,0,255,0.2),
+    rgba(0,179,255,0.2),
+    rgba(0,255,136,0.2)
+  );
+  z-index: 0;
+  filter: blur(20px);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.85);
+  border-radius: 12px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.dark-theme .card-content {
+  background: rgba(25,25,35,0.9);
+}

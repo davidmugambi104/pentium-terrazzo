@@ -1,0 +1,53 @@
+{
+  "name": "my-facebook-clone",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "analyze": "npm run build -- --mode analyze",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@heroicons/react": "^2.0.18",
+    "@livekit/components-react": "^1.5.3",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.14.19",
+    "@react-three/drei": "^9.94.1",
+    "@react-three/fiber": "^8.16.4",
+    "@use-gesture/react": "^10.2.25",
+    "axios": "^1.6.2",
+    "framer-motion": "^10.16.4",
+    "livekit-client": "^1.15.13",
+    "lodash": "^4.17.21",
+    "lodash.throttle": "^4.1.1",
+    "moment": "^2.30.1",
+    "react": "^18.2.0",
+    "react-confetti-explosion": "^2.1.2",
+    "react-dom": "^18.2.0",
+    "react-error-boundary": "^4.0.11",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.10.1",
+    "react-intersection-observer": "^9.16.0",
+    "react-parallax-tilt": "^1.7.287",
+    "react-router-dom": "^6.20.1",
+    "react-swipeable": "^7.0.2",
+    "three": "^0.158.0",
+    "three-stdlib": "^2.23.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "rollup-plugin-visualizer": "^5.14.0",
+    "vite": "^5.0.0"
+  }
+}

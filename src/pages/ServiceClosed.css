@@ -1,0 +1,59 @@
+.service-closed-container {
+  max-width: 600px;
+  margin: 5rem auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fffbe6;
+}
+
+.service-closed-container h1 {
+  color: #cc0000;
+  margin-bottom: 1.5rem;
+}
+
+.reason-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.reason-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  text-align: left;
+}
+
+.reason-list li {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+}
+
+.contact-note {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.contact-button {
+  display: inline-block;
+  margin: 0.5rem auto;
+  padding: 0.6rem 1.2rem;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.contact-button:hover {
+  background-color: #0056b3;
+}
+
+.home-link {
+  display: block;
+  margin-top: 1rem;
+  text-decoration: underline;
+  color: #333;
+}

@@ -1,0 +1,349 @@
+/* nav.css */
+:root {
+  --primary-gradient: linear-gradient(135deg, #2a6b5f 0%, #2A75B3  25%, #3AAFA9 50%, #00c1b3 75%, #e6fffc 100%);
+  --glass-bg: rgba(116, 234, 238, 0.95);
+  --navlink-color: #010807;
+}
+
+/* Enhanced Header */
+.navbar-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  background: var(--primary-gradient);
+  background-size: 400% 400%;
+  animation: gradientFlow 25s ease infinite;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Enlarged Brand */
+.navbar-brand .gradient-text {
+  font-size: 2.5rem; /* Increased size */
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  background: #000;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover .gradient-text {
+  transform: scale(1.05);
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Left-aligned Navlinks */
+.desktop-nav {
+  display: none;
+  gap: 2.5rem;
+  margin-left: 3rem; /* Push navlinks left */
+  position: relative;
+  z-index: 1001;
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.8rem 1.2rem;
+  color: var(--navlink-color);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.link-hover::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: #ff6b4a;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover .link-hover::before {
+  width: 100%;
+}
+
+/* Visible Toggle Button */
+.hamburger-line {
+  width: 0%;
+  height: 0px;
+  background: white;
+  border-radius: 5px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Animate Hamburger to Close */
+.hamburger.active .hamburger-line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active .hamburger-line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+.hamburger.active .hamburger-line {
+  background: #ff6b4a; /* Orange color for visibility */
+}
+
+/* Premium Mobile Menu */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 380px;
+  height: 100vh;
+  z-index: 999;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav.active {
+  right: 0;
+}
+
+.mobile-nav-glass {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  padding: 3rem 2rem;
+  box-shadow: -20px 0 50px rgba(0, 0, 0, 0.1);
+}
+
+/* Visible Close Button */
+.close-icon {
+  width: 25px;
+  height: 25px;
+  background: rgb(12, 1, 1);
+  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=\"white\"><path d=\"M6 6L18 18M6 18L18 6\" stroke=\"black\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>') no-repeat center;
+}
+
+.close-icon::before,
+.close-icon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: white; /* White for contrast */
+}
+
+.close-icon::before {
+  transform: rotate(45deg);
+}
+
+.close-icon::after {
+  transform: rotate(-45deg);
+}
+
+.close-button:hover {
+  transform: rotate(90deg);
+  background: #ff6b4a;
+}
+
+/* Animated Mobile Links */
+.mobile-nav-content {
+  margin-top: 4rem;
+}
+
+.mobile-nav-link {
+  display: block;
+  color: var(--navlink-color);
+  font-size: 1.3rem;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 12px;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.4s ease;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.mobile-nav.active .mobile-nav-link {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.mobile-nav-link:hover {
+  transform: translateX(10px);
+  background: white;
+}
+.mobile-nav-glass {
+  background-color: #2a6b5f;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar-brand .gradient-text {
+    font-size: 2rem;
+  }
+
+  .hamburger {
+    width: 5%;
+    height: 2px;
+    padding: 10px;
+  }
+
+  .mobile-nav {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 769px) {
+  .desktop-nav {
+    display: flex;
+  }
+}
+/* Mobile-First Adjustments */
+@media (max-width: 768px) {
+  /* Compact Header */
+  .navbar-header {
+    padding: 0.75rem 1.5rem;
+  }
+
+  /* Smaller Brand */
+  .navbar-brand .gradient-text {
+    font-size: 1.8rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  /* Visible Hamburger */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 1002;
+    padding: 8px;
+  }
+
+  .hamburger-line {
+    width: 30px;
+    z-index: 1001;
+    height: 3px;
+    background: var(--navlink-color);
+    transform-origin: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Full-screen Mobile Menu */
+  .mobile-nav {
+    width: 100vw;
+    right: -100vw;
+    max-width: none;
+  }
+
+  /* Mobile Menu Content */
+  .mobile-nav-glass {
+    padding: 6rem 2rem 2rem;
+  }
+
+  .mobile-nav-link {
+    font-size: 1.25rem;
+    padding: 1.25rem;
+    margin: 0.75rem 0;
+    transform: translateX(150%);
+  }
+
+  /* Enhanced Close Button */
+  .close-button {
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .close-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--navlink-color);
+  }
+}
+
+/* Touchscreen Optimization */
+@media (max-width: 480px) {
+  .navbar-header {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-brand .gradient-text {
+    font-size: 1.6rem;
+  }
+
+  .mobile-nav-link {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+
+  .hamburger {
+    padding: 1.8px;
+  }
+
+  .hamburger-line {
+    width: 5px;
+    height: 2.5px;
+  }
+}
+
+/* Portrait Orientation Fixes */
+@media (max-width: 768px) and (orientation: portrait) {
+  .mobile-nav {
+    backdrop-filter: blur(8px);
+  }
+}
+/* Add this at the end of your existing CSS */
+
+@media (max-width: 768px) {
+  /* Make navbar transparent by default on mobile */
+  .navbar-header {
+    background: transparent !important;
+    box-shadow: none !important;
+    animation: none !important;
+  }
+
+  /* Ensure hamburger is visible on transparent background */
+  .hamburger .hamburger-line {
+    background: white;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Change brand text to white for contrast */
+  .navbar-brand .gradient-text {
+    color: white;
+    -webkit-text-fill-color: white;
+    background: none;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  /* When menu is active, add background to header */
+  .hamburger.active ~ .mobile-nav.active + .navbar-container .navbar-header,
+  .mobile-nav.active + .navbar-container .navbar-header {
+    background: var(--primary-gradient) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    animation: gradientFlow 25s ease infinite !important;
+  }
+
+  /* Adjust hamburger color when menu is open */
+  .hamburger.active .hamburger-line {
+    background: #ff6b4a;
+    box-shadow: none;
+  }
+}
