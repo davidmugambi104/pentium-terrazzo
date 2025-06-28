@@ -351,30 +351,35 @@
 @media (max-width: 768px) {
   .navbar-brand .gradient-text {
     background: 
-      /* Dragon scale base gradient */
       linear-gradient(135deg, 
         #2a6b5f 0%, 
-        #2A75B3 15%, 
-        #3AAFA9 30%, 
-        #00c1b3 50%, 
-        #3AAFA9 70%, 
-        #2A75B3 85%, 
+        #2A75B3 10%, 
+        #3AAFA9 20%, 
+        #FF6EC7 35%,   /* Punk Pink */
+        #FFA500 50%,   /* Orange */
+        #00c1b3 65%, 
+        #3AAFA9 75%, 
+        #2A75B3 90%, 
         #2a6b5f 100%),
-      /* Scale texture overlay */
       repeating-radial-gradient(
         circle at 30% 40%,
         rgba(255, 255, 255, 0.4) 0%,
         rgba(255, 255, 255, 0.1) 3%,
         transparent 7%
       );
-    
     background-size: 
-      400% 400%,   /* For gradient animation */
-      150px 150px; /* Scale pattern size */
+      400% 400%, 
+      150px 150px;
     background-blend-mode: overlay;
     animation: 
       gradientFlow 25s ease infinite,
       scaleShimmer 4s ease-in-out infinite;
+    
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    
     text-shadow: 0 0 8px rgba(42, 107, 95, 0.7);
   }
 

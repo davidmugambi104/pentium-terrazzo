@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import './AboutPage.css'; 
 import Navbar from '../Navbar';
 import Footer from '../footer.jsx';
-import '../gallery.css'
-import { FaCertificate, FaShieldAlt, FaLeaf, FaStar, FaBuilding, FaHome, FaHotel, FaDraftingCompass } from 'react-icons/fa';
+import { FaCertificate, FaShieldAlt, FaLeaf, FaStar, FaBuilding, FaHome, FaHotel, FaDraftingCompass, FaChevronRight, FaWhatsapp } from 'react-icons/fa';
 
 import terrazzo1 from '../images/terrazzo1.jpg';
 import terrazzo2 from '../images/terrazzo2.jpg';
@@ -12,6 +11,7 @@ import terrazzo3 from '../images/terrazzo3.jpg';
 export const AboutUs = () => {
   const [loadedImages, setLoadedImages] = useState(0);
   const [activeProcess, setActiveProcess] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const businessPhotos = [
     terrazzo1,
@@ -39,7 +39,7 @@ export const AboutUs = () => {
     <div id="about-container" className="professional-background">
       <Navbar />
       
-      {/* Hero Section with Parallax Effect */}
+      {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-overlay"></div>
         <div className="hero-content">
@@ -59,6 +59,20 @@ export const AboutUs = () => {
               <span className="stat-label">Client Satisfaction</span>
             </div>
           </div>
+          <button 
+            className="cta-button hidden"
+            onClick={() => {
+              const whatsappNumber = '254729159585';
+              const defaultMessage = 'Hello Davmal Terrazzo! I would like to request a consultation.';
+              window.open(
+                `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(defaultMessage)}`,
+                '_blank'
+              );
+            }}
+          >
+            <FaWhatsapp className="button-icon" />
+            Request Consultation
+          </button>
         </div>
       </section>
 
@@ -79,7 +93,7 @@ export const AboutUs = () => {
               with modern innovation to create floors that stand the test of time.
             </p>
             <div className="signature">
-              <div className="signature-name">Fabian Nzoka</div>
+              <div className="signature-name">David Maleku</div>
               <div className="signature-title">Founder & Lead Craftsman</div>
             </div>
           </div>
@@ -181,37 +195,53 @@ export const AboutUs = () => {
           <div 
             className={`step ${activeProcess === 0 ? 'active' : ''}`}
             onMouseEnter={() => setActiveProcess(0)}
+            onClick={() => setActiveProcess(0)}
           >
             <div className="step-number">01</div>
             <h3>Consultation & Design</h3>
             <p>On-site evaluation and tailored design recommendations</p>
+            <div className="step-indicator">
+              <FaChevronRight />
+            </div>
           </div>
           
           <div 
             className={`step ${activeProcess === 1 ? 'active' : ''}`}
             onMouseEnter={() => setActiveProcess(1)}
+            onClick={() => setActiveProcess(1)}
           >
             <div className="step-number">02</div>
             <h3>Precision Preparation</h3>
             <p>Subfloor conditioning and meticulous pattern layout</p>
+            <div className="step-indicator">
+              <FaChevronRight />
+            </div>
           </div>
           
           <div 
             className={`step ${activeProcess === 2 ? 'active' : ''}`}
             onMouseEnter={() => setActiveProcess(2)}
+            onClick={() => setActiveProcess(2)}
           >
             <div className="step-number">03</div>
             <h3>Expert Installation</h3>
             <p>Master craftsmen applying specialized techniques</p>
+            <div className="step-indicator">
+              <FaChevronRight />
+            </div>
           </div>
           
           <div 
             className={`step ${activeProcess === 3 ? 'active' : ''}`}
             onMouseEnter={() => setActiveProcess(3)}
+            onClick={() => setActiveProcess(3)}
           >
             <div className="step-number">04</div>
             <h3>Final Perfection</h3>
             <p>Grinding, polishing, and rigorous quality inspection</p>
+            <div className="step-indicator">
+              <FaChevronRight />
+            </div>
           </div>
         </div>
         
@@ -268,15 +298,15 @@ export const AboutUs = () => {
 
         <div className="quality-badges">
           <div className="badge">
-            <FaCertificate className="badge-icon" style={{ color: '#2ecc71' }} />
+            <FaCertificate className="badge-icon" />
             <span>Certified Materials</span>
           </div>
           <div className="badge">
-            <FaShieldAlt className="badge-icon" style={{ color: '#3498db' }} />
+            <FaShieldAlt className="badge-icon" />
             <span>10-Year Installation Warranty</span>
           </div>
           <div className="badge">
-            <FaLeaf className="badge-icon" style={{ color: '#27ae60' }} />
+            <FaLeaf className="badge-icon" />
             <span>Low-VOC Compounds</span>
           </div>
         </div>
@@ -329,10 +359,8 @@ export const AboutUs = () => {
             <button 
               className="inquiry-button"
               onClick={() => { 
-                // Replace with your actual WhatsApp number
                 const whatsappNumber = '254729159585';
                 const defaultMessage = 'Hello Davmal Terrazzo! I would like to request a consultation about terrazzo installation.';
-                
                 window.open(
                   `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(defaultMessage)}`,
                   '_blank'
