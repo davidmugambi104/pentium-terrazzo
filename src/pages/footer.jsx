@@ -64,15 +64,15 @@ export const Footer = () => {
           <ul style={styles.contactList}>
             <li style={styles.contactItem}>
               <FaMapMarkerAlt style={styles.contactIcon} />
-              <span>123 Design Avenue, Creative District<br />New York, NY 10001</span>
+              <span>Moi avenue<br />Nairobi city</span>
             </li>
             <li style={styles.contactItem}>
               <FaPhoneAlt style={styles.contactIcon} />
-              <span>+1 (555) 123-4567</span>
+              <span>+254 722 316668</span>
             </li>
             <li style={styles.contactItem}>
               <FaEnvelope style={styles.contactIcon} />
-              <span>info@prestigeterrazzo.com</span>
+              <span>info@davmalterrazzo.com</span>
             </li>
             <li style={styles.contactItem}>
               <FaClock style={styles.contactIcon} />
