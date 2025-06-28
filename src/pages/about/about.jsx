@@ -79,7 +79,7 @@ export const AboutUs = () => {
               with modern innovation to create floors that stand the test of time.
             </p>
             <div className="signature">
-              <div className="signature-name">David Maleku</div>
+              <div className="signature-name">Fabian Nzoka</div>
               <div className="signature-title">Founder & Lead Craftsman</div>
             </div>
           </div>
