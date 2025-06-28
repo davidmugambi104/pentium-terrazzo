@@ -37,6 +37,7 @@
     "react-parallax-tilt": "^1.7.287",
     "react-router-dom": "^6.20.1",
     "react-swipeable": "^7.0.2",
+    "styled-components": "^6.1.19",
     "three": "^0.158.0",
     "three-stdlib": "^2.23.0",
     "zod": "^3.22.4"

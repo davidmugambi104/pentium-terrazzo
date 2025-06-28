@@ -20,6 +20,7 @@ import GlowingTicker from './newsHeadlines';
 import './home.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScroll, useTransform } from 'framer-motion';
+import FloatingWhatsApp from './whatspp';
 
 // Dummy SectionParallax implementation (replace with your actual import if available)
 const SectionParallax = ({ speed, children }) => <div>{children}</div>;
@@ -756,6 +757,10 @@ const HomePage = () => {
           <AntiquePhotoFrame />
           <ShopGallery/>
           <GlowingTicker/>
+          <FloatingWhatsApp 
+                phone="+254 729 159585"
+                message="Hello! I visited your website and would like more information."
+          />
           {/* <ThemeToggle theme={theme} toggleTheme={toggleTheme} /> */}
           
           {/* {renderHeroSection()} */}

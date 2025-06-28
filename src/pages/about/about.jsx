@@ -36,8 +36,11 @@ export const AboutUs = () => {
   }, []);
 
   return (
+    <div>
+      <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+
     <div id="about-container" className="professional-background">
-      <Navbar />
+
       
       {/* Hero Section */}
       <section className="hero-section">
@@ -380,6 +383,7 @@ export const AboutUs = () => {
       </section>
       
       <Footer />
+    </div>
     </div>
   );
 };
