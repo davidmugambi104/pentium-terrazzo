@@ -3,7 +3,7 @@ import './AboutPage.css';
 import Navbar from '../Navbar';
 import Footer from '../footer.jsx';
 import { FaCertificate, FaShieldAlt, FaLeaf, FaStar, FaBuilding, FaHome, FaHotel, FaDraftingCompass, FaChevronRight, FaWhatsapp } from 'react-icons/fa';
-
+import FloatingWhatsApp from '../whatspp.jsx';
 import terrazzo1 from '../images/terrazzo1.jpg';
 import terrazzo2 from '../images/terrazzo2.jpg';
 import terrazzo3 from '../images/terrazzo3.jpg';
@@ -381,6 +381,10 @@ export const AboutUs = () => {
           </div>
         </div>
       </section>
+      <FloatingWhatsApp 
+        phone="+254 729 159585"
+        message="Hello! I visited your website and would like more information."
+      />
       
       <Footer />
     </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './gallery.css';
 import Navbar from '../pages/Navbar';
 import Footer from './footer';
-
+import FloatingWhatsApp from './whatspp.jsx';
 const TerrazzoGallery = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const terrazzoImages = Object.values(import.meta.glob('./images/*.jpg', { 
@@ -91,6 +91,10 @@ const TerrazzoGallery = () => {
           />
         </div>
       )}
+      <FloatingWhatsApp 
+        phone="+254 729 159585"
+        message="Hello! I visited your website and would like more information."
+      />
 
       <Footer />
     </div>

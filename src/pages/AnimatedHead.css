@@ -1,6 +1,7 @@
 .davmal-heading {
   font-size: 2.5rem;
   font-weight: 700;
+  color: #2c3e50;
   margin-bottom: 1.5rem;
   letter-spacing: 1.5px;
   min-height: 3.2rem;
@@ -55,6 +56,7 @@
 
 .terrazzo-features li {
   padding: 0.5rem 0;
+  color: black;
   position: relative;
   padding-left: 1.8rem;
 }

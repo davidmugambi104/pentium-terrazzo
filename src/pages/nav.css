@@ -1,6 +1,6 @@
 /* nav.css */
 :root {
-  --primary-gradient: linear-gradient(135deg, #2a6b5f 0%, #2A75B3  25%, #3AAFA9 50%, #00c1b3 75%, #e6fffc 100%);
+  --primary-gradient: linear-gradient(135deg,  #2A75B3  50%, #3AAFA9 100%);
   --glass-bg: rgba(116, 234, 238, 0.95);
   --navlink-color: #010807;
 }

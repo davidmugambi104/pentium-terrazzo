@@ -5,13 +5,15 @@
   --dragon-3: #3AAFA9;
   --dragon-4: #00c1b3;
   --dragon-gradient: linear-gradient(135deg, 
-    #2a6b5f 0%, 
-    #2A75B3 15%, 
-    #3AAFA9 30%, 
-    #00c1b3 50%, 
-    #3AAFA9 70%, 
-    #2A75B3 85%, 
-    #2a6b5f 100%);
+        #2a6b5f 0%, 
+        #2A75B3 10%, 
+        #3AAFA9 20%, 
+        #FF6EC7 35%,   /* Punk Pink */
+        #FFA500 50%,   /* Orange */
+        #00c1b3 65%, 
+        #3AAFA9 75%, 
+        #2A75B3 90%, 
+        #2a6b5f 100%);
 }
 
 #about-container {
@@ -307,7 +309,7 @@
 
 /* Who We Serve */
 .highlighted {
-  background: var(--dragon-gradient);
+  background: var(--dragon-2);
   color: white;
   padding: 5rem 2rem;
 }
@@ -442,7 +444,7 @@
   top: 0;
   left: 0;
   height: 100%;
-  background: var(--dragon-gradient);
+  background: var(--dragon-2);
   border-radius: 2px;
   transition: width 0.5s ease;
 }
@@ -531,7 +533,7 @@
 /* CTA Section */
 .cta-section {
   padding: 5rem 2rem;
-  background: var(--dragon-gradient);
+  background: var(--dragon-2);
   color: white;
 }
 
@@ -605,7 +607,7 @@
   display: block;
   width: 100%;
   padding: 18px;
-  background: var(--dragon-gradient);
+  background: var(--dragon-1);
   color: white;
   border: none;
   border-radius: 8px;

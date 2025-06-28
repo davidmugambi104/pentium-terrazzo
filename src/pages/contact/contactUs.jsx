@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 import './contact.css';
 import Navbar from '../Navbar';
 import Footer from '../footer.jsx';
-
+import FloatingWhatsApp from '../whatspp.jsx';
 const ContactForm = () => {
   const [activeTab, setActiveTab] = useState('email');
   const [formData, setFormData] = useState({
@@ -177,6 +177,10 @@ const ContactForm = () => {
       </form>
     
     </div>
+    <FloatingWhatsApp 
+     phone="+254 729 159585"
+     message="Hello! I visited your website and would like more information."
+    />
     <Footer />
     </React.Fragment>
   );
