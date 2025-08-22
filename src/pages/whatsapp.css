@@ -323,7 +323,7 @@
 .chat-input textarea {
   flex: 1;
   border: none;
-  background-color: rgb(12, 12, 12);
+  background-color: rgb(252, 250, 250);
   border-radius: 20px;
   padding: 10px 15px;
   resize: none;
