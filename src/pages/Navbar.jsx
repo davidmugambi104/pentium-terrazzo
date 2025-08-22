@@ -24,7 +24,7 @@ function Navbar() {
     <header className="navbar-header">
       <div className="navbar-container">
         <a href="/" className="navbar-brand">
-          <span className="gradient-text">DAVMAL</span>
+          <span className="gradient-text">PENTIUM</span>
         </a>
 
         {/* Mobile Toggle Button (Visible only on small screens) */}

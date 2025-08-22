@@ -17,7 +17,7 @@ const ContactForm = () => {
   const [success, setSuccess] = useState(null);
 
 
-  const whatsappNumber = '+254729159585'; // International format
+  const whatsappNumber = '+254728422571'; // International format
 
   useEffect(() => {
     if (success) {
@@ -178,7 +178,7 @@ const ContactForm = () => {
     
     </div>
     <FloatingWhatsApp 
-     phone="+254 729 159585"
+     phone="+254 728422571"
      message="Hello! I visited your website and would like more information."
     />
     <Footer />

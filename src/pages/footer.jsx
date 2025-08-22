@@ -68,11 +68,11 @@ export const Footer = () => {
             </li>
             <li style={styles.contactItem}>
               <FaPhoneAlt style={styles.contactIcon} />
-              <span>+254 722 316668</span>
+              <span>+254 728422571</span>
             </li>
             <li style={styles.contactItem}>
               <FaEnvelope style={styles.contactIcon} />
-              <span>info@davmalterrazzo.com</span>
+              <span>musyokapeter678@gmail.com</span>
             </li>
             <li style={styles.contactItem}>
               <FaClock style={styles.contactIcon} />

@@ -11,8 +11,8 @@ class ResponsiveAnimatedHeading extends React.Component {
       index: 0
     };
 
-    this.fullHeading = "DAVMAL ENT TERRAZZO";
-    this.fullSubHeading = "Premium terrazzo solutions for modern spaces. Crafted with marble, quartz, and glass aggregates in epoxy or cement bases. Superior durability, seamless finishes, and endless design possibilities, all in a range of stunning colors. Whatsapp us or call  on +254729159585";
+    this.fullHeading = "PENTIUM TERRAZZO ENTERPRISE";
+    this.fullSubHeading = "Premium terrazzo solutions for modern spaces. Crafted with marble, quartz, and glass aggregates in epoxy or cement bases. Superior durability, seamless finishes, and endless design possibilities, all in a range of stunning colors. Whatsapp us or call  on +254728422571";
 
     this.combinedText = this.fullHeading + this.fullSubHeading;
     this.typingSpeed = Math.floor(1000 / this.combinedText.length); // ≈4ms

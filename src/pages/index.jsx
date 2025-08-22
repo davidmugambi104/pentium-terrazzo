@@ -749,16 +749,16 @@ const HomePage = () => {
           {/* <AnimateHead/> */}
           <MovieCarousel/>
           <div className="antique-players-container">
-            <div className="player"><YouTubeAntiquePlayer /></div>
+            {/* <div className="player"><YouTubeAntiquePlayer /></div>
             <div className="player"><YouTubeAntiquePlayer1 /></div>
             <div className="player"><YouTubeAntiquePlayer2 /></div>
-            <div className="player"><YouTubeAntiquePlayer3 /></div>
+            <div className="player"><YouTubeAntiquePlayer3 /></div> */}
           </div>
           <AntiquePhotoFrame />
           <ShopGallery/>
           <GlowingTicker/>
           <FloatingWhatsApp 
-                phone="+254 729 159585"
+                phone="+254 728422571"
                 message="Hello! I visited your website and would like more information."
           />
           {/* <ThemeToggle theme={theme} toggleTheme={toggleTheme} /> */}

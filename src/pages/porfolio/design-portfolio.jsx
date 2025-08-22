@@ -561,17 +561,17 @@ const BusinessPortfolio = () => {
             <div className="footer-contact">
               <h4>Contact Us</h4>
               <p>Kayole junction<br />Craftsmanship</p>
-              <p>Phone: +254 729159585<br />Email: info@davmalterrazzo.com</p>
+              <p>Phone: +254 728422571<br />Email: info@pentiumterrazzo.com</p>
             </div>
           </div>
           
           <div className="footer-bottom">
-            <p>© {new Date().getFullYear()} Terrazzo Masters. All rights reserved. | NTMA Certified Installers | LEED Green Associates</p>
+            <p>© {new Date().getFullYear()} Pentium Terrazzo Enterprise. All rights reserved. | NTMA Certified Installers | LEED Green Associates</p>
           </div>
         </div>
       </footer>
         <FloatingWhatsApp 
-        phone="+254 729 159585"
+        phone="+254 728422571"
         message="Hello! I visited your website and would like more information."
       />
     </div>
