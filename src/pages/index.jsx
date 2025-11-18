@@ -747,7 +747,7 @@ const HomePage = () => {
           </div>
 
           {/* <AnimateHead/> */}
-          <MovieCarousel/>
+          
           <div className="antique-players-container">
             {/* <div className="player"><YouTubeAntiquePlayer /></div>
             <div className="player"><YouTubeAntiquePlayer1 /></div>
@@ -756,6 +756,7 @@ const HomePage = () => {
           </div>
           <AntiquePhotoFrame />
           <ShopGallery/>
+          <MovieCarousel/>
           <GlowingTicker/>
           <FloatingWhatsApp 
                 phone="+254 728422571"

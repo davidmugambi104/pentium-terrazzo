@@ -87,11 +87,11 @@ const FloatingWhatsApp = () => {
     { 
       keywords: ['pricing', 'price', 'cost', 'how much', 'rate', 'rates'], 
       responses: [
-        "Our terrazzo installation starts from Ksh 1500 per square meter, depending on design and finish.",
-        "Pricing varies based on design complexity, but our standard terrazzo starts at Ksh 1500 per square meter.",
-        "We offer competitive pricing starting at Ksh 1500 per square meter. Would you like a detailed quote?",
-        "For a basic terrazzo installation, we charge from Ksh 1500 per square meter. Custom designs may vary.",
-        "Our rates begin at Ksh 1500 per square meter. The final cost depends on your specific requirements."
+        "Our terrazzo installation starts from Ksh 2500 per square meter, depending on design and finish.",
+        "Pricing varies based on design complexity, but our standard terrazzo starts at Ksh 2500 per square meter.",
+        "We offer competitive pricing starting at Ksh 2500 per square meter. Would you like a detailed quote?",
+        "For a basic terrazzo installation, we charge from Ksh 2500 per square meter. Custom designs may vary.",
+        "Our rates begin at Ksh 2500 per square meter. The final cost depends on your specific requirements."
       ] 
     },
     { 
