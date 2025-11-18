@@ -1,28 +1,86 @@
-import { useState, useEffect } from 'react';
-import { XMarkIcon, ArrowLeftIcon, ArrowRightIcon, ShareIcon } from '@heroicons/react/24/outline';
+import { useState, useEffect, useRef } from 'react';
+import { 
+  XMarkIcon, 
+  ArrowLeftIcon, 
+  ArrowRightIcon, 
+  ShareIcon,
+  HeartIcon,
+  PhotoIcon,
+  MagnifyingGlassPlusIcon,
+  MagnifyingGlassMinusIcon
+} from '@heroicons/react/24/outline';
+import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
+
+// Import your images
 import terrazzo58 from './images/terrazzo58.jpg';
 import terrazzo53 from './images/terrazzo18.jpg';
+import terrazzo69 from './images/terrazzo69.jpg';
+import terrazzo46 from './images/terrazzo46.jpg';
+import "./ShopGallery.css";
+
 const ShopGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [favorites, setFavorites] = useState(new Set());
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 });
+  const [activeFilter, setActiveFilter] = useState('all');
+  const modalRef = useRef(null);
+  const imageRef = useRef(null);
 
   const images = [
     {
       id: 1,
       url: terrazzo58,
-      title: 'Happy client',
-      description: 'Designed a unique terrazzo pattern with a modern touch for a client'
+      title: 'Modern Terrazzo Pattern',
+      description: 'Designed a unique terrazzo pattern with a modern touch for a client in downtown Miami',
+      category: 'residential',
+      tags: ['modern', 'custom', 'luxury'],
+      date: '2024-01-15',
+      location: 'Miami, FL'
     },
-
     {
       id: 2,
       url: terrazzo53,
-      title: 'Vicodec highschool project',
-      description: 'Completed a large-scale terrazzo installation in a high school'
+      title: 'Educational Institution Project',
+      description: 'Completed a large-scale terrazzo installation in a high school with durable, low-maintenance finish',
+      category: 'commercial',
+      tags: ['durable', 'large-scale', 'educational'],
+      date: '2024-02-20',
+      location: 'Orlando, FL'
     },
-
+    {
+      id: 3,
+      url: terrazzo69, // Replace with actual image
+      title: 'Hospital Restoration',
+      description: 'Restored historic terrazzo floors with authentic period patterns and colors',
+      category: 'historic',
+      tags: ['restoration', 'art-deco', 'historic'],
+      date: '2024-03-10',
+      location: 'ngong hills'
+    },
+    {
+      id: 4,
+      url: terrazzo46, // Replace with actual image
+      title: 'Contemporary Office Space',
+      description: 'Custom terrazzo design for corporate headquarters featuring company branding',
+      category: 'commercial',
+      tags: ['corporate', 'branding', 'contemporary'],
+      date: '2024-01-30',
+      location: 'Tampa, FL'
+    }
   ];
 
+  const categories = ['all', 'residential', 'commercial', 'historic'];
+
+  // Filter images based on active category
+  const filteredImages = activeFilter === 'all' 
+    ? images 
+    : images.filter(img => img.category === activeFilter);
+
+  // Preload images
   useEffect(() => {
     images.forEach(img => {
       const image = new Image();
@@ -30,359 +88,334 @@ const ShopGallery = () => {
     });
   }, []);
 
+  // Handle body scroll and keyboard events
   useEffect(() => {
     const handleBodyScroll = (shouldLock) => {
       document.body.style.overflow = shouldLock ? 'hidden' : 'auto';
-      document.body.style.touchAction = shouldLock ? 'none' : 'auto';
+    };
+
+    const handleKeyDown = (e) => {
+      if (!selectedImage) return;
+      
+      switch(e.key) {
+        case 'Escape':
+          closeModal();
+          break;
+        case 'ArrowLeft':
+          navigate(-1);
+          break;
+        case 'ArrowRight':
+          navigate(1);
+          break;
+        default:
+          break;
+      }
     };
 
     if (selectedImage) {
       handleBodyScroll(true);
-      window.scrollTo(0, 0);
+      window.addEventListener('keydown', handleKeyDown);
     } else {
       handleBodyScroll(false);
+      window.removeEventListener('keydown', handleKeyDown);
     }
 
-    return () => handleBodyScroll(false);
-  }, [selectedImage]);
+    return () => {
+      handleBodyScroll(false);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedImage, currentImageIndex]);
 
   const openImage = (index) => {
     setCurrentImageIndex(index);
-    setSelectedImage(images[index]);
+    setSelectedImage(filteredImages[index]);
+    setZoomLevel(1);
+    setImagePosition({ x: 0, y: 0 });
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+    setZoomLevel(1);
+    setImagePosition({ x: 0, y: 0 });
   };
 
   const navigate = (direction) => {
-    const newIndex = (currentImageIndex + direction + images.length) % images.length;
+    const newIndex = (currentImageIndex + direction + filteredImages.length) % filteredImages.length;
     setCurrentImageIndex(newIndex);
-    setSelectedImage(images[newIndex]);
+    setSelectedImage(filteredImages[newIndex]);
+    setZoomLevel(1);
+    setImagePosition({ x: 0, y: 0 });
+  };
+
+  const toggleFavorite = (imageId, e) => {
+    e.stopPropagation();
+    setFavorites(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(imageId)) {
+        newFavorites.delete(imageId);
+      } else {
+        newFavorites.add(imageId);
+      }
+      return newFavorites;
+    });
+  };
+
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev + 0.25, 3));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev - 0.25, 1));
+  };
+
+  const handleZoomReset = () => {
+    setZoomLevel(1);
+    setImagePosition({ x: 0, y: 0 });
+  };
+
+  // Mouse events for panning zoomed image
+  const handleMouseDown = (e) => {
+    if (zoomLevel <= 1) return;
+    setIsDragging(true);
+    setDragStart({
+      x: e.clientX - imagePosition.x,
+      y: e.clientY - imagePosition.y
+    });
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging || zoomLevel <= 1) return;
+    
+    const newX = e.clientX - dragStart.x;
+    const newY = e.clientY - dragStart.y;
+    
+    // Calculate bounds to prevent dragging beyond image edges
+    const img = imageRef.current;
+    if (img) {
+      const maxX = (img.naturalWidth * zoomLevel - img.clientWidth) / 2;
+      const maxY = (img.naturalHeight * zoomLevel - img.clientHeight) / 2;
+      
+      setImagePosition({
+        x: Math.max(Math.min(newX, maxX), -maxX),
+        y: Math.max(Math.min(newY, maxY), -maxY)
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const shareImage = async (e) => {
+    e.stopPropagation();
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: selectedImage.title,
+          text: selectedImage.description,
+          url: window.location.href,
+        });
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+      }
+    } catch (err) {
+      console.log('Error sharing:', err);
+    }
   };
 
   return (
-    <div className="gallery-container">
+    <div className="shop-gallery">
+      {/* Filter Tabs */}
+      <div className="gallery-filters">
+        {categories.map(category => (
+          <button
+            key={category}
+            className={`filter-btn ${activeFilter === category ? 'active' : ''}`}
+            onClick={() => setActiveFilter(category)}
+          >
+            {category.charAt(0).toUpperCase() + category.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {/* Image Grid */}
       <div className="image-grid">
-        {images.map((img, index) => (
+        {filteredImages.map((img, index) => (
           <div 
             key={img.id}
-            className="image-item"
-            onMouseEnter={(e) => e.currentTarget.classList.add('hovered')}
-            onMouseLeave={(e) => e.currentTarget.classList.remove('hovered')}
+            className="image-card"
             onClick={() => openImage(index)}
           >
-            <img 
-              src={img.url} 
-              alt={img.title}
-              width={400}
-              height={300}
-              className="grid-image"
-              loading="lazy"
-            />
-            <button className="view-button">View Details</button>
+            <div className="image-container">
+              <img 
+                src={img.url} 
+                alt={img.title}
+                className="grid-image"
+                loading="lazy"
+              />
+              <div className="image-overlay">
+                <button 
+                  className={`favorite-btn ${favorites.has(img.id) ? 'favorited' : ''}`}
+                  onClick={(e) => toggleFavorite(img.id, e)}
+                >
+                  {favorites.has(img.id) ? (
+                    <HeartSolid className="icon" />
+                  ) : (
+                    <HeartIcon className="icon" />
+                  )}
+                </button>
+                <button className="view-button">
+                  <PhotoIcon className="icon" />
+                  View Details
+                </button>
+              </div>
+            </div>
+            <div className="image-meta">
+              <h3>{img.title}</h3>
+              <p>{img.description}</p>
+              <div className="image-tags">
+                {img.tags.map(tag => (
+                  <span key={tag} className="tag">{tag}</span>
+                ))}
+              </div>
+            </div>
           </div>
         ))}
       </div>
 
+      {/* Modal */}
       {selectedImage && (
-        <div className="modal-overlay">
+        <div 
+          className="modal-overlay"
+          onClick={closeModal}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
           <div 
             className="modal-content"
-            onTouchMove={(e) => e.stopPropagation()}
-            onScroll={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
+            ref={modalRef}
           >
-            <button 
-              className="close-btn" 
-              onClick={() => setSelectedImage(null)}
-              aria-label="Close"
-            >
-              <XMarkIcon className="icon" />
-            </button>
-            
-            <button className="share-btn" aria-label="Share">
-              <ShareIcon className="icon" />
-            </button>
-
-            <img 
-              src={selectedImage.url} 
-              alt={selectedImage.title}
-              className="modal-image"
-              width={1200}
-              height={800}
-            />
-            
-            <div className="image-info">
-              <h3>{selectedImage.title}</h3>
-              <p>{selectedImage.description}</p>
+            {/* Header Controls */}
+            <div className="modal-header">
+              <div className="modal-info">
+                <h2>{selectedImage.title}</h2>
+                <p>{selectedImage.location} • {new Date(selectedImage.date).toLocaleDateString()}</p>
+              </div>
+              <div className="modal-controls">
+                <button 
+                  className="control-btn"
+                  onClick={handleZoomOut}
+                  disabled={zoomLevel <= 1}
+                >
+                  <MagnifyingGlassMinusIcon className="icon" />
+                </button>
+                <button 
+                  className="control-btn"
+                  onClick={handleZoomReset}
+                >
+                  {Math.round(zoomLevel * 100)}%
+                </button>
+                <button 
+                  className="control-btn"
+                  onClick={handleZoomIn}
+                  disabled={zoomLevel >= 3}
+                >
+                  <MagnifyingGlassPlusIcon className="icon" />
+                </button>
+                <button 
+                  className="control-btn"
+                  onClick={shareImage}
+                >
+                  <ShareIcon className="icon" />
+                </button>
+                <button 
+                  className={`control-btn ${favorites.has(selectedImage.id) ? 'favorited' : ''}`}
+                  onClick={(e) => toggleFavorite(selectedImage.id, e)}
+                >
+                  {favorites.has(selectedImage.id) ? (
+                    <HeartSolid className="icon" />
+                  ) : (
+                    <HeartIcon className="icon" />
+                  )}
+                </button>
+                <button 
+                  className="control-btn close-btn"
+                  onClick={closeModal}
+                >
+                  <XMarkIcon className="icon" />
+                </button>
+              </div>
             </div>
 
+            {/* Image Container */}
+            <div 
+              className="image-viewer"
+              onMouseDown={handleMouseDown}
+            >
+              <img 
+                ref={imageRef}
+                src={selectedImage.url} 
+                alt={selectedImage.title}
+                className="modal-image"
+                style={{
+                  transform: `scale(${zoomLevel}) translate(${imagePosition.x}px, ${imagePosition.y}px)`,
+                  cursor: zoomLevel > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default'
+                }}
+              />
+            </div>
+
+            {/* Footer Info */}
+            <div className="modal-footer">
+              <div className="image-details">
+                <p>{selectedImage.description}</p>
+                <div className="detail-grid">
+                  <div className="detail-item">
+                    <strong>Category:</strong>
+                    <span>{selectedImage.category}</span>
+                  </div>
+                  <div className="detail-item">
+                    <strong>Location:</strong>
+                    <span>{selectedImage.location}</span>
+                  </div>
+                  <div className="detail-item">
+                    <strong>Date:</strong>
+                    <span>{new Date(selectedImage.date).toLocaleDateString()}</span>
+                  </div>
+                </div>
+                <div className="image-tags">
+                  {selectedImage.tags.map(tag => (
+                    <span key={tag} className="tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Navigation */}
             <button 
-              className="nav-btn prev" 
+              className="nav-btn prev"
               onClick={() => navigate(-1)}
-              aria-label="Previous"
             >
               <ArrowLeftIcon className="icon" />
             </button>
             <button 
-              className="nav-btn next" 
+              className="nav-btn next"
               onClick={() => navigate(1)}
-              aria-label="Next"
             >
               <ArrowRightIcon className="icon" />
             </button>
+
+            {/* Counter */}
+            <div className="image-counter">
+              {currentImageIndex + 1} / {filteredImages.length}
+            </div>
           </div>
         </div>
       )}
     </div>
   );
 };
-
-const styles = `
-.gallery-container {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.image-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-  gap: 1.5rem;
-}
-
-.image-item {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-  aspect-ratio: 4/3;
-}
-
-.grid-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-  background-size: 200% 100%;
-  animation: 1.5s shine linear infinite;
-}
-
-@keyframes shine {
-  to {
-    background-position-x: -200%;
-  }
-}
-
-.image-item.hovered .grid-image {
-  transform: scale(0.95);
-  filter: blur(2px);
-}
-
-.view-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) !important;
-  padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  border-radius: 25px;
-  font-weight: 600;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  cursor: pointer;
-  z-index: 2;
-  margin: 0 !important;
-  white-space: nowrap;
-}
-
-.image-item.hovered .view-button {
-  opacity: 1;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-  touch-action: none;
-}
-
-.modal-content {
-  position: fixed;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  max-width: 90%;
-  max-height: 90vh;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #111;
-  -webkit-transform: translateZ(0);
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  backface-visibility: hidden;
-  will-change: transform;
-}
-
-.modal-content::-webkit-scrollbar {
-  display: none;
-}
-
-.modal-image {
-  width: 100%;
-  height: auto;
-  max-height: 80vh;
-  object-fit: contain;
-}
-
-.image-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2rem;
-  background: linear-gradient(transparent 10%, rgba(0, 0, 0, 0.7) 40%);
-  color: white;
-  backdrop-filter: blur(2px);
-}
-
-.close-btn, .share-btn {
-  position: absolute;
-  top: 1rem;
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
-  padding: 0.5rem;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  z-index: 2;
-}
-
-.close-btn {
-  right: 1rem;
-}
-
-.share-btn {
-  left: 1rem;
-}
-
-.close-btn:hover, .share-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.icon {
-  width: 24px;
-  height: 24px;
-  color: white;
-}
-
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
-  padding: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  z-index: 2;
-}
-
-.nav-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.prev {
-  left: 1rem;
-}
-
-.next {
-  right: 1rem;
-}
-
-@media (max-width: 768px) {
-  .modal-content {
-    width: 95vw !important;
-    height: auto !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    margin: 0 !important;
-    border-radius: 12px;
-  }
-
-  .modal-image {
-    max-height: 65vh;
-  }
-
-  .image-info {
-    padding: 1.5rem;
-  }
-
-  @supports (-webkit-touch-callout: none) {
-    .modal-content {
-      max-height: -webkit-fill-available;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .gallery-container {
-    padding: 1rem;
-  }
-
-  .image-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .image-item {
-    aspect-ratio: 3/2;
-  }
-
-  .view-button {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-  }
-
-  .modal-content {
-    border-radius: 8px;
-  }
-
-  .image-info {
-    padding: 1rem;
-  }
-
-  .image-info h3 {
-    font-size: 1.1rem;
-  }
-
-  .image-info p {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 360px) {
-  .image-item img {
-    height: 200px;
-  }
-
-  .view-button {
-    font-size: 0.8rem;
-    padding: 6px 12px;
-  }
-}
-`;
-
-const styleSheet = document.createElement('style');
-styleSheet.innerText = styles;
-document.head.appendChild(styleSheet);
 
 export default ShopGallery;

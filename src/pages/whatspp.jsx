@@ -68,7 +68,7 @@ const FloatingWhatsApp = () => {
   const widgetRef = useRef(null);
   const emojiPickerRef = useRef(null);
   
-  const whatsappNumber = "+254728422571";
+  const whatsappNumber = "+254726740469";
   const supportHours = "8:00 AM - 8:00 PM (GMT+3)";
   const supportEmail = "support@company.com";
   

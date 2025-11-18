@@ -65,7 +65,7 @@ export const AboutUs = () => {
           <button 
             className="cta-button hidden"
             onClick={() => {
-              const whatsappNumber = '254728422571';
+              const whatsappNumber = '254726740469';
               const defaultMessage = 'Hello Davmal Terrazzo! I would like to request a consultation.';
               window.open(
                 `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(defaultMessage)}`,
@@ -88,7 +88,7 @@ export const AboutUs = () => {
               Since 2010, Pentium Terrazzo Enterprises has transformed floors across Nairobi city and beyond,
               into stunning terrazzo masterpieces. What began as a family passion for 
               durable, beautiful surfaces has grown into a specialized installation 
-              service trusted by <span className="highlight">+254728422571</span> satisfied customers.
+              service trusted by <span className="highlight">+254726740469</span> satisfied customers.
             </p>
             <p>
               Our journey started with a single vision: to bring Italian craftsmanship 
@@ -96,7 +96,7 @@ export const AboutUs = () => {
               with modern innovation to create floors that stand the test of time.
             </p>
             <div className="signature">
-              <div className="signature-name">peter musyoka</div>
+              <div className="signature-name">David Mugambi</div>
               <div className="signature-title">Founder & Lead Craftsman</div>
             </div>
           </div>
@@ -109,7 +109,7 @@ export const AboutUs = () => {
               />
               <div className="image-badge">
                 <FaStar className="badge-icon" />
-                <span>Since 2010</span>
+                <span>Since 2015</span>
               </div>
             </div>
           </div>
@@ -362,7 +362,7 @@ export const AboutUs = () => {
             <button 
               className="inquiry-button"
               onClick={() => { 
-                const whatsappNumber = '254728422571';
+                const whatsappNumber = '254726740469';
                 const defaultMessage = 'Hello Pentium Terrazzo! I would like to request a consultation about terrazzo installation.';
                 window.open(
                   `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(defaultMessage)}`,
@@ -371,7 +371,7 @@ export const AboutUs = () => {
               }}
             >
               <span>WhatsApp Us Now</span>
-              <span>+254 728 422571</span>
+              <span>+254 726740469</span>
             </button>
             
             <div className="guarantee-badge">
@@ -382,7 +382,7 @@ export const AboutUs = () => {
         </div>
       </section>
       <FloatingWhatsApp 
-        phone="+254728422571"
+        phone="+254726740469"
         message="Hello! I visited your website and would like more information."
       />
       
