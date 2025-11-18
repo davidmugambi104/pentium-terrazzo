@@ -16,7 +16,7 @@ export const Footer = () => {
           </p>
           <div style={styles.socialContainer}>
             <a 
-              href="https://wa.me/+254729159585?text=Hello%2C%20I%20need%20terrazzo%20%5Binstallation%5D%20or%20%5Bmaterials%5D"
+              href="https://wa.me/+254726740469?text=Hello%2C%20I%20need%20terrazzo%20%5Binstallation%5D%20or%20%5Bmaterials%5D"
               target="_blank" 
               rel="noopener noreferrer" 
               style={styles.socialLink}
@@ -49,11 +49,11 @@ export const Footer = () => {
         <div style={styles.footerColumn}>
           <h3 style={styles.columnHeading}>Quick Links</h3>
           <ul style={styles.linkList}>
-            <li style={styles.listItem}><a href="#" style={styles.link}>Home</a></li>
-            <li style={styles.listItem}><a href="#" style={styles.link}>About Us</a></li>
-            <li style={styles.listItem}><a href="#" style={styles.link}>Our Projects</a></li>
-            <li style={styles.listItem}><a href="#" style={styles.link}>Terrazzo Types</a></li>
-            <li style={styles.listItem}><a href="#" style={styles.link}>Sustainability</a></li>
+            <li style={styles.listItem}><a href="." style={styles.link}>Home</a></li>
+            <li style={styles.listItem}><a href="/about" style={styles.link}>About Us</a></li>
+            <li style={styles.listItem}><a href="/portfolio" style={styles.link}>Our Projects</a></li>
+            <li style={styles.listItem}><a href="/photos" style={styles.link}>Terrazzo Types</a></li>
+            <li style={styles.listItem}><a href="/portfolio" style={styles.link}>Sustainability</a></li>
             <li style={styles.listItem}><a href="#" style={styles.link}>Careers</a></li>
           </ul>
         </div>
@@ -68,11 +68,11 @@ export const Footer = () => {
             </li>
             <li style={styles.contactItem}>
               <FaPhoneAlt style={styles.contactIcon} />
-              <span>+254 728422571</span>
+              <span>+254 726740469</span>
             </li>
             <li style={styles.contactItem}>
               <FaEnvelope style={styles.contactIcon} />
-              <span>musyokapeter678@gmail.com</span>
+              <span>davidmugambi104@gmail.com</span>
             </li>
             <li style={styles.contactItem}>
               <FaClock style={styles.contactIcon} />

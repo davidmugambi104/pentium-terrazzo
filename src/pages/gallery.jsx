@@ -59,7 +59,7 @@ const TerrazzoGallery = () => {
                 className="inquiry-button"
                 onClick={(e) => { 
                   e.stopPropagation();
-                  const whatsappNumber = '+254728422571';
+                  const whatsappNumber = '+254726740469';
                   const defaultMessage = 'Hello! I would like to request a sample of this terrazzo design.';
                   window.open(
                     `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(defaultMessage)}`,
@@ -92,7 +92,7 @@ const TerrazzoGallery = () => {
         </div>
       )}
       <FloatingWhatsApp 
-        phone="+254 728422571"
+        phone="+254 726740469"
         message="Hello! I visited your website and would like more information."
       />
 

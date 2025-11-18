@@ -11,7 +11,7 @@ class ResponsiveAnimatedHeading extends React.Component {
       index: 0
     };
 
-    this.fullHeading = "PENTIUM TERRAZZO ENTERPRISE";
+    this.fullHeading = "ELITE TERRAZZO KENYA";
     this.fullSubHeading = "Premium terrazzo solutions for modern spaces. Crafted with marble, quartz, and glass aggregates in epoxy or cement bases. Superior durability, seamless finishes, and endless design possibilities, all in a range of stunning colors. Whatsapp us or call  on +254728422571";
 
     this.combinedText = this.fullHeading + this.fullSubHeading;
