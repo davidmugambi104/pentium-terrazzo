@@ -28,15 +28,17 @@ function Navbar() {
         </a>
 
         {/* Mobile Toggle Button (Visible only on small screens) */}
-        <button 
-          className={`hamburger ${isMenuOpen ? 'active' : ''}`}
+        <button
+          className={`nav-toggle ${isMenuOpen ? "is-open" : ""}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Menu"
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMenuOpen}
         >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
+          <span className="nav-toggle__bar"></span>
+          <span className="nav-toggle__bar"></span>
+          <span className="nav-toggle__bar"></span>
         </button>
+
 
         {/* Desktop Navigation (Left-aligned) */}
         <nav className="desktop-nav nav-blend-zone">

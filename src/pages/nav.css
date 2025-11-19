@@ -13,6 +13,51 @@
   --navlink-color: #010807;
 }
 /* Gradient text style */
+/* Container */
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+/* Bars */
+.nav-toggle__bar {
+  width: 100%;
+  height: 3px;
+  background: #6ad4cf;
+  border-radius: 4px;
+  transition: 
+    transform 0.35s ease,
+    opacity 0.35s ease,
+    background-color 0.35s ease;
+}
+
+/* Active State (Menu Open) */
+.nav-toggle.is-open .nav-toggle__bar:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.nav-toggle.is-open .nav-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-open .nav-toggle__bar:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Hover subtle effect (Google-like micro-interaction) */
+.nav-toggle:hover .nav-toggle__bar {
+  background-color: #3AAFA9;
+}
+
 .gradient-text {
   font-family: 'Montserrat', 'Poppins', sans-serif; /* pick one */
   font-weight: 800;
