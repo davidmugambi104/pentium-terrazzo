@@ -23,9 +23,9 @@ const SEO = ({
   structuredData,
   article
 }) => {
-  const siteTitle = 'Terrazzo Excellence';
+  const siteTitle = 'Elite Terrazzo Kenya';
   const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
-  const siteUrl = 'https://terrazzoexcellence.com';
+  const siteUrl = 'https://elite-terrazzo-creatives.vercel.app/';
 
   return (
     <Helmet>
