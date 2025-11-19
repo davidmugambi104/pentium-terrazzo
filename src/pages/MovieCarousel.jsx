@@ -2,36 +2,34 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { useSwipeable } from 'react-swipeable';
 import './MovieCarousel.css';
 
-// Dynamically import all terrazzo images (adjust based on your actual file structure)
 const importAll = (r) => r.keys().map(r);
-// Replace the require.context import with Vite's import.meta.glob
 const terrazzoImages = Object.values(import.meta.glob('./images/*.jpg', { eager: true })).map(mod => mod.default);
 
 const MOVIE_TEMPLATES = [
   {
     title: "The Midnight Zone",
     description: "A sci-fi thriller exploring parallel dimensions",
-    duration: 1
+    duration: 8
   },
   {
     title: "Cyber Revolution",
     description: "Futuristic warfare in a digital age",
-    duration: 1
+    duration: 8
   },
   {
     title: "Ocean's Depth",
     description: "Mysterious creatures of the deep sea",
-    duration: 1
+    duration: 8
   },
   {
     title: "Space Pioneers",
     description: "Colonizing Mars in 22nd century",
-    duration: 1
+    duration: 8
   },
   {
     title: "Ancient Secrets",
     description: "Uncovering lost civilizations",
-    duration: 1
+    duration: 8
   }
 ];
 
@@ -63,98 +61,109 @@ const useMovieData = () => {
 
 const preloadImages = (movies) => {
   movies.forEach(({ image, thumbnail }) => {
-    new Image().src = image;
-    new Image().src = thumbnail;
+    const img1 = new Image();
+    const img2 = new Image();
+    img1.src = image;
+    img2.src = thumbnail;
   });
 };
 
 const useCarouselControls = (movies, isPlaying) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const intervalRef = useRef(null);
+  const transitionRef = useRef(null);
 
   const startInterval = useCallback(() => {
+    if (!movies.length) return;
+    
     const duration = (movies[currentIndex]?.duration || 8) * 1000;
     
+    clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % movies.length);
-      setProgress(0);
+      setIsTransitioning(true);
+      
+      // Start transition
+      setTimeout(() => {
+        setCurrentIndex(prev => (prev + 1) % movies.length);
+      }, 50);
+      
+      // End transition
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 1850);
+      
     }, duration);
 
     return () => clearInterval(intervalRef.current);
   }, [movies, currentIndex]);
 
   useEffect(() => {
-    if (isPlaying && movies.length) {
+    if (isPlaying && movies.length && !isTransitioning) {
       startInterval();
     }
     return () => clearInterval(intervalRef.current);
-  }, [isPlaying, movies, startInterval]);
-
-  const resetProgress = useCallback(() => {
-    setProgress(0);
-    clearInterval(intervalRef.current);
-    if (isPlaying) startInterval();
-  }, [isPlaying, startInterval]);
+  }, [isPlaying, movies, startInterval, isTransitioning]);
 
   const handleNavigation = useCallback((direction) => {
-    setCurrentIndex(prev => {
-      const newIndex = (prev + direction + movies.length) % movies.length;
-      return newIndex;
-    });
-    resetProgress();
-  }, [movies.length, resetProgress]);
+    setIsTransitioning(true);
+    clearInterval(intervalRef.current);
+    
+    setTimeout(() => {
+      setCurrentIndex(prev => {
+        const newIndex = (prev + direction + movies.length) % movies.length;
+        return newIndex;
+      });
+    }, 50);
+    
+    setTimeout(() => {
+      setIsTransitioning(false);
+      if (isPlaying) startInterval();
+    }, 1850);
+  }, [movies.length, isPlaying, startInterval]);
 
-  return { currentIndex, progress, handleNavigation, resetProgress };
+  return { currentIndex, isTransitioning, handleNavigation };
 };
 
-
-const Slide = ({ movie, isActive }) => (
-  <div className={`slide ${isActive ? 'active' : ''}`}>
+const Slide = React.memo(({ movie, position, isActive }) => (
+  <div className={`slide ${position} ${isActive ? 'active' : ''}`}>
     <div className="slide-image-container">
-      <img src={movie.image} alt={movie.title} className="slide-image" />
-      <div className="screen-curvature" />
-      <div className="crt-overlay" />
-    </div>
-    <div className="movie-content">
-      <div className="content-overlay" />
-      <InfoPanel movie={movie} />
-    </div>
-  </div>
-);
-
-const InfoPanel = ({ movie }) => (
-  <div className="info-panel">
-    <h2 className="movie-title">{movie.title}</h2>
-    <p className="movie-description">{movie.description}</p>
-    <div className="action-buttons">
-      <button className="play-button">▶ Play</button>
-      <button className="info-button">ⓘ More Info</button>
-    </div>
-    <div className="metadata">
-      <span className="duration">⏳ {movie.duration}h</span>
-      <span className="rating">⭐ {movie.rating || '8.5'}/10</span>
+      <img 
+        src={movie.image} 
+        alt={movie.title} 
+        className="slide-image"
+        loading="eager"
+      />
+      <div className="image-overlay" />
     </div>
   </div>
-);
+));
 
-const Thumbnail = ({ movie, isActive, onClick }) => (
-  <div className={`thumbnail ${isActive ? 'active' : ''}`} onClick={onClick}>
+const Thumbnail = React.memo(({ movie, isActive, onClick }) => (
+  <div 
+    className={`thumbnail ${isActive ? 'active' : ''}`} 
+    onClick={onClick}
+    role="button"
+    tabIndex={0}
+    onKeyDown={(e) => e.key === 'Enter' && onClick()}
+  >
     <div className="thumbnail-hover-layer" />
-    <img src={movie.thumbnail} alt={movie.title} className="thumbnail-image" />
-    <div className="thumbnail-info">
-      <span className="thumbnail-title">{movie.title}</span>
-    </div>
+    <img 
+      src={movie.thumbnail} 
+      alt={movie.title} 
+      className="thumbnail-image"
+      loading="lazy"
+    />
   </div>
-);
+));
 
-const ThumbnailCarousel = ({ movies, currentIndex, onThumbnailClick }) => {
+const ThumbnailCarousel = React.memo(({ movies, currentIndex, onThumbnailClick }) => {
   const containerRef = useRef(null);
   
   const visibleThumbnails = useMemo(() => {
     if (!containerRef.current) return 5;
     return Math.floor(containerRef.current.offsetWidth / 160);
-  }, [containerRef.current?.offsetWidth]);
+  }, []);
 
   const startIndex = Math.max(0, currentIndex - Math.floor(visibleThumbnails / 2));
   const endIndex = Math.min(movies.length, startIndex + visibleThumbnails);
@@ -171,35 +180,82 @@ const ThumbnailCarousel = ({ movies, currentIndex, onThumbnailClick }) => {
       ))}
     </div>
   );
-};
+});
 
 export const MovieCarousel = () => {
   const movies = useMovieData();
   const [isPlaying, setIsPlaying] = useState(true);
-  const { currentIndex, progress, handleNavigation, resetProgress } = useCarouselControls(movies, isPlaying);
+  const { currentIndex, isTransitioning, handleNavigation } = useCarouselControls(movies, isPlaying);
+  
   const handlers = useSwipeable({
-    onSwipedLeft: () => handleNavigation(1),
-    onSwipedRight: () => handleNavigation(-1),
-    trackMouse: true
+    onSwipedLeft: () => !isTransitioning && handleNavigation(1),
+    onSwipedRight: () => !isTransitioning && handleNavigation(-1),
+    trackMouse: true,
+    delta: 10
   });
+
+  const handleThumbnailClick = useCallback((index) => {
+    if (!isTransitioning) {
+      handleNavigation(index - currentIndex);
+    }
+  }, [currentIndex, isTransitioning, handleNavigation]);
 
   if (!movies.length) return (
     <div className="loading-container">
       <div className="loading-spinner"></div>
-      <p>Loading Movies...</p>
+      <p>Loading images...</p>
     </div>
   );
 
   return (
-    <>
-      <div {...handlers} className="main-display">
-        {movies.map((movie, index) => (
-          <Slide key={movie.id} movie={movie} isActive={index === currentIndex} />
-        ))}
+    <div className="carousel-container">
+      <div 
+        {...handlers} 
+        className={`main-display ${isTransitioning ? 'transitioning' : ''}`}
+      >
+        {movies.map((movie, index) => {
+          let position = 'next';
+          if (index === currentIndex) position = 'active';
+          else if (index === (currentIndex - 1 + movies.length) % movies.length) position = 'prev';
+          
+          return (
+            <Slide 
+              key={movie.id} 
+              movie={movie} 
+              position={position}
+              isActive={index === currentIndex}
+            />
+          );
+        })}
+        
+        <div className="carousel-controls">
+          <button 
+            className="nav-button prev"
+            onClick={() => !isTransitioning && handleNavigation(-1)}
+            disabled={isTransitioning}
+            aria-label="Previous movie"
+          >
+            ‹
+          </button>
+          <button 
+            className="nav-button next"
+            onClick={() => !isTransitioning && handleNavigation(1)}
+            disabled={isTransitioning}
+            aria-label="Next movie"
+          >
+            ›
+          </button>
+        </div>
       </div>
 
-
-    </>
+      <div className="thumbnail-section">
+        <ThumbnailCarousel
+          movies={movies}
+          currentIndex={currentIndex}
+          onThumbnailClick={handleThumbnailClick}
+        />
+      </div>
+    </div>
   );
 };
 

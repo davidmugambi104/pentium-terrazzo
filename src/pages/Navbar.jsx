@@ -24,7 +24,7 @@ function Navbar() {
     <header className="navbar-header">
       <div className="navbar-container">
         <a href="/" className="navbar-brand">
-           <span className="gradient-text">ELITE®</span>
+           <span className="gradient-text">ELITE</span>
         </a>
 
         {/* Mobile Toggle Button (Visible only on small screens) */}
@@ -39,7 +39,7 @@ function Navbar() {
         </button>
 
         {/* Desktop Navigation (Left-aligned) */}
-        <nav className="desktop-nav">
+        <nav className="desktop-nav nav-blend-zone">
           <NavLink to="/" className="nav-link">Home</NavLink>
           <NavLink to="/about" className="nav-link">About</NavLink>
           <NavLink to="/portfolio" className="nav-link">Portfolio</NavLink>

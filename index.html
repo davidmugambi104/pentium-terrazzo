@@ -1,124 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" id="themeColor" content="#ff0000">
-  <meta name="msapplication-navbutton-color" id="navButtonColor" content="#ff0000">
-  <meta name="apple-mobile-web-app-status-bar-style" id="statusBarColor" content="#ff0000">
-  <meta name="description" content="davmal -we offer terrazzo instalations at affordable prices" />
-  <meta name="keywords" content="terrazzo, flooring, installation, affordable, quality, kenya, fabian terrazzo, terrazzo, cheapest terrazzo, terrazzo installation,terrazzo materials" />
-  <meta name="author" content="Fabian Terrazzo" />
+  
+  <!-- Dynamic Theme Colors -->
+  <meta name="theme-color" id="themeColor" content="#2c5530">
+  <meta name="msapplication-navbutton-color" id="navButtonColor" content="#2c5530">
+  <meta name="apple-mobile-web-app-status-bar-style" id="statusBarColor" content="#2c5530">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Pentium Terrazzo Enterprises - Professional terrazzo flooring installation, restoration, and maintenance at affordable prices in Kenya. Quality terrazzo solutions for residential and commercial projects." />
+  <meta name="keywords" content="terrazzo, flooring, installation, affordable, quality, kenya, fabian terrazzo, terrazzo, cheapest terrazzo, terrazzo installation, terrazzo materials, terrazzo flooring, terrazzo restoration, terrazzo maintenance" />
+  <meta name="author" content="Pentium Terrazzo Enterprises" />
   <meta name="robots" content="index, follow" />
-  <meta name="google-site-verification" content="davmal-terrazzo enterprises" />
-  <link rel="icon" href="#" type="image/x-icon" />
-  <link rel="apple-touch-icon" href="#" />
+  <meta name="google-site-verification" content="pentium-terrazzo-enterprises" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/logo.jpeg" type="image/jpeg" />
+  <link rel="apple-touch-icon" href="/logo.jpeg" />
 
-
-  <meta property="og:title" content="Pentium terrazzo enterprises - Affordable Terrazzo Installation" />
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Pentium Terrazzo Enterprises - Affordable Terrazzo Installation & Restoration" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Pentium terrazzo Enterprise" />
-  <meta property="og:description" content="We offer terrazzo installation at affordable prices. Our team is dedicated to providing high-quality service and ensuring customer satisfaction. Contact us today for a free quote!" />
+  <meta property="og:site_name" content="Pentium Terrazzo Enterprises" />
+  <meta property="og:description" content="Professional terrazzo installation, restoration, and maintenance services in Kenya. We offer high-quality terrazzo flooring solutions at affordable prices. Free quotes available." />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image" content="./logo.jpeg">
+  <meta property="og:image" content="/logo.jpeg">
   <meta property="og:url" content="https://www.pentium-terrazzo.com/" />
-  <meta property="og:locale" content="en_US" />
-  <title>Pentium Terrazzo Enterprise</title>
+  <meta property="og:locale" content="en_KE" />
 
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pentium Terrazzo Enterprises - Affordable Terrazzo Solutions" />
+  <meta name="twitter:description" content="Professional terrazzo installation, restoration, and maintenance services in Kenya. Quality workmanship at competitive prices." />
+  <meta name="twitter:image" content="/logo.jpeg" />
 
+  <title>Pentium Terrazzo Enterprises - Professional Terrazzo Installation & Restoration</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Pentium Terrazzo Enterprises",
+    "description": "Professional terrazzo installation, restoration, and maintenance services in Kenya",
+    "url": "https://www.pentium-terrazzo.com",
+    "telephone": "+254-XXX-XXXXXX",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Kenya"
+    },
+    "areaServed": "Kenya",
+    "knowsAbout": [
+      "Terrazzo flooring installation",
+      "Terrazzo restoration services",
+      "Polished terrazzo maintenance",
+      "Terrazzo countertops installation",
+      "Affordable terrazzo solutions Kenya"
+    ],
+    "priceRange": "$$",
+    "openingHours": "Mo-Fr 08:00-18:00, Sa 08:00-14:00"
+  }
+  </script>
 </head>
 <body>
-  <!-- <canvas id="starCanvas"></canvas> -->
   <div id="root"></div>
   
-
   <script type="module" src="/src/main.jsx"></script>
+  
+  <!-- Dynamic Color Transition Script -->
   <script>
     const colorSets = [
-
-        ['#2C3E50', '#34495E', '#5D6D7E', '#FDFEFE'],
-
-        ['#2F2F2F', '#4A4A4A', '#7F8C8D', '#ECF0F1'],
-
-        ['#2C2C54', '#40407A', '#706FD3', '#F8F9F9'],
-
-        ['#2A2B2D', '#3D3D3F', '#6C757D', '#F8F9FA']
+      ['#2C5530', '#4A7C59', '#8b4513', '#d4af37'], // Primary brand colors
+      ['#2F2F2F', '#4A4A4A', '#7F8C8D', '#ECF0F1'], // Neutral grays
+      ['#2C2C54', '#40407A', '#706FD3', '#F8F9F9'], // Blues
+      ['#2A2B2D', '#3D3D3F', '#6C757D', '#F8F9FA']  // Dark grays
     ];
 
     let currentSet = 0;
-    let transitionProgress = 0;
     const transitionDuration = 5000;
 
-    function hslColor(hex) {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-        const hsl = rgbToHsl(r, g, b);
-        return hsl;
-    }
+    function hexToHsl(hex) {
+      const r = parseInt(hex.slice(1, 3), 16) / 255;
+      const g = parseInt(hex.slice(3, 5), 16) / 255;
+      const b = parseInt(hex.slice(5, 7), 16) / 255;
 
-    function rgbToHsl(r, g, b) {
-        r /= 255, g /= 255, b /= 255;
-        const max = Math.max(r, g, b), min = Math.min(r, g, b);
-        let h, s, l = (max + min) / 2;
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
 
-        if (max === min) {
-            h = s = 0;
-        } else {
-            const d = max - min;
-            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-            switch(max) {
-                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-                case g: h = (b - r) / d + 2; break;
-                case b: h = (r - g) / d + 4; break;
-            }
-            h /= 6;
+      if (max === min) {
+        h = s = 0;
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
         }
-        return [h * 360, s * 100, l * 100];
+        h /= 6;
+      }
+      return [h * 360, s * 100, l * 100];
     }
 
     function interpolateColors(startHSL, endHSL, progress) {
-        const h = startHSL[0] + (endHSL[0] - startHSL[0]) * progress;
-        const s = startHSL[1] + (endHSL[1] - startHSL[1]) * progress;
-        const l = startHSL[2] + (endHSL[2] - startHSL[2]) * progress;
-        return `hsl(${h}, ${s}%, ${l}%)`;
+      const h = startHSL[0] + (endHSL[0] - startHSL[0]) * progress;
+      const s = startHSL[1] + (endHSL[1] - startHSL[1]) * progress;
+      const l = startHSL[2] + (endHSL[2] - startHSL[2]) * progress;
+      return `hsl(${h}, ${s}%, ${l}%)`;
     }
 
     function updateColors() {
-        const now = Date.now();
-        const progress = (now % transitionDuration) / transitionDuration;
-        
-        const currentColors = colorSets[currentSet];
-        const nextColors = colorSets[(currentSet + 1) % colorSets.length];
-        
-        const blendedColors = currentColors.map((_, i) => {
-            const startHSL = hslColor(currentColors[i]);
-            const endHSL = hslColor(nextColors[i]);
-            return interpolateColors(startHSL, endHSL, progress);
-        });
+      const now = Date.now();
+      const progress = (now % transitionDuration) / transitionDuration;
+      
+      const currentColors = colorSets[currentSet];
+      const nextColors = colorSets[(currentSet + 1) % colorSets.length];
+      
+      const blendedColors = currentColors.map((_, i) => {
+        const startHSL = hexToHsl(currentColors[i]);
+        const endHSL = hexToHsl(nextColors[i]);
+        return interpolateColors(startHSL, endHSL, progress);
+      });
 
+      // Update meta theme colors
+      document.getElementById('themeColor').content = blendedColors[0];
+      document.getElementById('navButtonColor').content = blendedColors[0];
+      document.getElementById('statusBarColor').content = blendedColors[0];
 
-        document.getElementById('themeColor').content = blendedColors[0];
-        document.getElementById('navButtonColor').content = blendedColors[0];
-        document.getElementById('statusBarColor').content = blendedColors[0];
+      // Update CSS custom properties for dynamic theming
+      document.documentElement.style.setProperty('--color-primary', blendedColors[0]);
+      document.documentElement.style.setProperty('--color-primary-light', blendedColors[1]);
+      document.documentElement.style.setProperty('--color-secondary', blendedColors[2]);
+      document.documentElement.style.setProperty('--color-accent', blendedColors[3]);
 
-        requestAnimationFrame(updateColors);
+      requestAnimationFrame(updateColors);
 
-        if (progress > 0.99) {
-            currentSet = (currentSet + 1) % colorSets.length;
-        }
+      if (progress > 0.99) {
+        currentSet = (currentSet + 1) % colorSets.length;
+      }
     }
 
+    // Start color transitions
     updateColors();
-</script>
+  </script>
 </body>
 </html>

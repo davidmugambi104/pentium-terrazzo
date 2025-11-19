@@ -9,6 +9,7 @@ import YouTubeAntiquePlayer from './VideoPopup';
 import YouTubeAntiquePlayer1 from './youtube2';
 import YouTubeAntiquePlayer2 from './youtube3';
 import YouTubeAntiquePlayer3 from './youtube4';
+import { blogPosts } from './data/blogPosts'
 import ShopGallery from './frame';
 import Navbar from './Navbar';
 import AnimatedHead from './AnimatedHead'
@@ -21,6 +22,7 @@ import './home.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScroll, useTransform } from 'framer-motion';
 import FloatingWhatsApp from './whatspp';
+import SEO from './SEO';
 
 // Dummy SectionParallax implementation (replace with your actual import if available)
 const SectionParallax = ({ speed, children }) => <div>{children}</div>;
@@ -146,6 +148,34 @@ const usePerformanceMonitor = () => {
 
   return metrics;
 };
+
+const featuredPosts = blogPosts.slice(0, 3);
+
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Terrazzo Excellence',
+    description: 'Premium terrazzo installation, restoration, and maintenance services',
+    url: 'https://terrazzoexcellence.com',
+    telephone: '+1-555-123-4567',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '123 Design District',
+      addressLocality: 'Portland',
+      addressRegion: 'OR',
+      postalCode: '97209',
+      addressCountry: 'US'
+    },
+    areaServed: 'Portland Metro Area',
+    knowsAbout: [
+      'Terrazzo flooring installation',
+      'Terrazzo restoration services',
+      'Polished terrazzo maintenance',
+      'Terrazzo countertops installation',
+      'Sustainable terrazzo design'
+    ]
+  };
+
 
 // 3. AI Recommendation Engine
 const useDesignRecommendationEngine = (userPreferences, interactionHistory) => {
@@ -709,7 +739,12 @@ const HomePage = () => {
       </div>
     </section>
   );
-
+      <SEO
+        title="Terrazzo Excellence"
+        description="Premium terrazzo installation, restoration, and maintenance services. Sustainable, beautiful terrazzo solutions for residential and commercial projects."
+        keywords="terrazzo flooring, terrazzo installation, terrazzo restoration, polished terrazzo"
+        structuredData={structuredData}
+      />
   // Performance monitoring dashboard
   const renderPerformanceDashboard = () => (
     <section className="performance-section">
@@ -756,7 +791,8 @@ const HomePage = () => {
           </div>
           <AntiquePhotoFrame />
           <ShopGallery/>
-          <MovieCarousel/>
+
+          {/* <MovieCarousel/> */}
           <GlowingTicker/>
           <FloatingWhatsApp 
                 phone="+254 728422571"

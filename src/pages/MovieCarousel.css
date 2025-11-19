@@ -1,376 +1,84 @@
-.movie-carousel {
+.carousel-container {
   position: relative;
-  max-width: 720px; /* Reduced from 960px */
-  height: 420px; /* Reduced from 560px */
-  left:50%;
-  transform: translateX(-50%);
-  margin: 1.5rem auto; /* Reduced from 2rem */
-  border-radius: 15px; /* Reduced from 20px */
+  width: 80%;
+  max-width: 1600px;        /* optional: prevents it from getting too wide */
+  height: 100vh;
+  background: #000;
   overflow: hidden;
-  box-shadow: 0 19px 38px -9px rgba(0, 0, 0, 0.3); /* Scaled shadow */
-  background: rgba(20, 20, 20, 0.95);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
-  .loading-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-    color: white;
-  }
-  
-  .loading-spinner {
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top: 4px solid #e50914;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  .main-display {
-    position: relative;
-    height: 70vh;
-    min-height: 600px;
-    overflow: hidden;
-  }
-
-  .slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1s ease-in-out, transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-    background-size: cover;
-    background-position: center;
-    transform: scale(0.98);
-  }
-  
-  .slide.active {
-    opacity: 1;
-    transform: scale(1);
-  }
-  
-  .content-wrapper {
-    position: relative;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.8) 30%,
-      rgba(0, 0, 0, 0) 100%
-    );
-  }
-  
-  .movie-info {
-    position: absolute;
-    bottom: 15%;
-    left: 5%;
-    max-width: 600px;
-    color: white;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
-    backdrop-filter: blur(5px);
-    transform: translateY(20px);
-    opacity: 0;
-    animation: slideUp 0.5s ease forwards;
-  }
-  
-  @keyframes slideUp {
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  .movie-title {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    line-height: 1.1;
-  }
-  
-  .movie-description {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    opacity: 0.9;
-    max-width: 80%;
-  }
-  
-  .action-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-  
-  .play-button, .info-button {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .play-button {
-    background: #e50914;
-    color: white;
-  }
-  
-  .play-button:hover {
-    background: #f40612;
-    transform: translateY(-2px);
-  }
-  
-  .info-button {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    backdrop-filter: blur(5px);
-  }
-  
-  .info-button:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-  }
-  
-  .progress-container {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 10;
-  }
-  
-  .progress-track {
-    width: 60px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-    cursor: pointer;
-    overflow: hidden;
-    transition: transform 0.2s ease;
-  }
-  
-  .progress-track:hover {
-    transform: scaleY(1.5);
-  }
-  
-  .progress-fill {
-    height: 100%;
-    background: #e50914;
-    transition: width 0.1s linear;
-  }
-  
-  .progress-fill.active {
-    background: #fff;
-  }
-  
-  .navigation-controls {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 2rem;
-    pointer-events: none;
-  }
-  
-  .nav-button {
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(5px);
-    pointer-events: all;
-  }
-  
-  .nav-button:hover {
-    background: rgba(0, 0, 0, 0.8);
-    transform: scale(1.1);
-  }
-  
-  .arrow {
-    font-size: 2rem;
-    position: relative;
-    top: -2px;
-  }
-  
-  .thumbnail-carousel {
-    position: relative;
-    height: 150px;
-    margin: 2rem 0;
-    overflow: hidden;
-    padding: 0 2rem;
-  }
-  
-  .thumbnail {
-    position: absolute;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    filter: brightness(0.8);
-  }
-  
-  .thumbnail.active {
-    filter: brightness(1);
-    transform: scale(1.05);
-  }
-  
-  .thumbnail-content {
-    position: relative;
-    width: 240px;
-    height: 135px;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  }
-  
-  .thumbnail:hover .thumbnail-content {
-    transform: translateY(-10px);
-  }
-  
-  .thumbnail-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  
-  .thumbnail-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 1rem;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    color: white;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  
-  .thumbnail-title {
-    font-weight: bold;
-    font-size: 0.9rem;
-  }
-  
-  .thumbnail-duration {
-    font-size: 0.8rem;
-    opacity: 0.8;
-  }
-  
-  .thumbnail:hover .thumbnail-overlay {
-    opacity: 1;
-  }
-  
-  @media (max-width: 768px) {
-    .movie-carousel {
-      border-radius: 0;
-      margin: 0 auto;
-    }
-  
-    .main-display {
-      height: 50vh;
-      min-height: 400px;
-    }
-  
-    .movie-title {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-  
-    .movie-description {
-      font-size: 1rem;
-      max-width: 90%;
-    }
-  
-    .action-buttons {
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-  
-    .progress-track {
-      width: 40px;
-    }
-  
-    .thumbnail-carousel {
-      height: 120px;
-    }
-  
-    .thumbnail-content {
-      width: 160px;
-      height: 90px;
-    }
-  
-    .nav-button {
-      width: 40px;
-      height: 40px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .movie-title {
-      font-size: 1.5rem;
-    }
-  
-    .movie-description {
-      font-size: 0.9rem;
-    }
-  
-    .thumbnail-carousel {
-      display: none;
-    }
-  }
-  /* MovieCarousel.css */
-/* CRT TV Effects */
-.tv-screen {
-  position: relative;
-  background: #F8F9FF;
-  border-radius: 8px;
-  min-width: 940px;
-  height: 560px;
-  overflow: hidden;
-  transform: translateZ(0);
-  animation: crt-flicker 0.15s infinite;
+  margin-left: auto;
+  margin-right: 0;        /* or 40px, 2rem, etc. – small gap from right edge */
 }
 
-.screen-curvature {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 8px;
-  box-shadow: inset 0 0 60px rgba(0,0,0,0.4);
+.main-display {
+  position: relative;
+  width: 80%;
+  height: 80vh;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.main-display.transitioning {
   pointer-events: none;
-  z-index: 2;
 }
 
-.crt-overlay {
+.slide {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(100%) scale(0.92);
+  transition: all 1800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: all;
+  z-index: 3;
+}
+
+.slide.prev {
+  opacity: 0;
+  transform: translateX(-100%) scale(0.92);
+  z-index: 1;
+}
+
+.slide.next {
+  opacity: 0;
+  transform: translateX(100%) scale(0.92);
+  z-index: 1;
+}
+
+.slide-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(1.05) contrast(1.05) saturate(1.1);
+  transform: scale(1.01);
+  transition: transform 1800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.slide.active .slide-image {
+  transform: scale(1);
+}
+
+.image-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -378,505 +86,203 @@
   height: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(255,255,255,0.02) 50%,
-    rgba(0,0,0,0.02) 50%
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.1) 20%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 100%
   );
-  background-size: 100% 4px;
-  animation: scanline 4s linear infinite;
-  z-index: 3;
   pointer-events: none;
+  z-index: 2;
 }
 
-@keyframes scanline {
-  from { transform: translateY(-100%); }
-  to { transform: translateY(100%); }
-}
-
-/* Enhanced Image Handling */
-.slide-image-container {
-  position: relative;
-  width: 90%;
-  height: 80%;
-  margin: 5% auto;
-  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.slide-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 4px;
-  transform: scale(0.95);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              filter 0.4s ease;
-  filter: brightness(0.9);
-}
-
-.slide.active .slide-image {
-  transform: scale(1);
-  filter: brightness(1);
-}
-
-.slide:hover .slide-image {
-  filter: blur(8px) brightness(0.7);
-  transform: scale(1.02);
-}
-
-/* Hover Content Animation */
-.movie-content {
+.carousel-controls {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 10;
 }
 
-.slide:hover .movie-content {
+.nav-button {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+}
+
+.nav-button:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.8);
   opacity: 1;
-  transform: translateY(0);
-  pointer-events: all;
+  transform: scale(1.1);
 }
 
-.info-panel {
+.nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.thumbnail-section {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 2rem;
-  background: linear-gradient(transparent, rgba(0,0,0,0.9));
-  transform: translateY(40px);
-  transition: transform 0.4s ease;
+  height: 20vh;
+  background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
 }
 
-.slide:hover .info-panel {
-  transform: translateY(0);
-}
-
-/* Ultra-Smooth Thumbnail Carousel */
 .thumbnail-carousel {
-  position: relative;
-  height: 140px;
-  margin-top: 2rem;
-  transform-style: preserve-3d;
-  perspective: 1000px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  overflow-x: visible;
+  padding: 1rem 0;
 }
 
 .thumbnail {
-  position: absolute;
-  width: 200px;
-  height: 120px;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              filter 0.3s ease,
-              transform 0.3s ease;
-  transform-origin: center bottom;
-  border-radius: 4px;
+  position: relative;
+  min-width: 140px;
+  height: 90px;
+  border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
-  filter: saturate(0.4) brightness(0.8);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: scale(0.9);
+  opacity: 0.6;
+  filter: brightness(0.7);
+  border: 2px solid transparent;
 }
 
 .thumbnail:hover {
-  filter: saturate(1) brightness(1.1);
-  transform: translateZ(20px) scale(1.15);
-  z-index: 100;
+  transform: scale(0.95);
+  opacity: 0.8;
+  filter: brightness(0.9);
+}
+
+.thumbnail.active {
+  transform: scale(1.1);
+  opacity: 1;
+  filter: brightness(1.2);
+  border-color: #e50914;
+  z-index: 2;
+  box-shadow: 0 8px 32px rgba(229, 9, 20, 0.3);
 }
 
 .thumbnail-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  object-position: center;
+  filter: contrast(1.1) saturate(1.1);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.thumbnail-info {
-  position: absolute;
-  bottom: -100%;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  background: rgba(0,0,0,0.8);
-  transition: all 0.3s ease;
+.thumbnail.active .thumbnail-image {
+  transform: scale(1.05);
 }
 
-.thumbnail:hover .thumbnail-info {
-  bottom: 0;
-}
-
-/* Enhanced TV Frame */
-.tv-frame {
-  position: relative;
-  background: #1a1a1a;
-  min-width: 960px;
-  height: 560px;
-  border-radius: 15px;
-  padding: 0.5rem 0.5rem;
-  box-shadow: 
-    0 0 80px rgba(0,0,0,0.8),
-    inset 0 0 40px rgba(0,0,0,0.5);
-  transform: perspective(1000px) rotateX(3deg);
-}
-
-.tv-frame::after {
-  content: "";
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  width: 140px;
-  height: 50px;
-  background: #2a2a2a;
-  border-radius: 0 0 15px 15px;
-  transform: translateX(-50%);
-}
-
-/* New Physics-Based Animations */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes glow {
-  0% { box-shadow: 0 0 20px rgba(255,0,0,0.4); }
-  50% { box-shadow: 0 0 40px rgba(255,0,0,0.6); }
-  100% { box-shadow: 0 0 20px rgba(255,0,0,0.4); }
-}
-
-.active .slide-image {
-  animation: float 6s ease-in-out infinite;
-}
-
-.active .thumbnail {
-  animation: glow 3s ease infinite;
-}
-
-/* Advanced Blur Transitions */
-.content-overlay {
+.thumbnail-hover-layer {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(10px);
-  mask: linear-gradient(to bottom, 
-    transparent 0%,
-    rgba(0,0,0,0.8) 30%,
-    rgba(0,0,0,1) 50%,
-    rgba(0,0,0,0.8) 70%,
-    transparent 100%
-  );
-}
-/* Add to your CSS */
-@keyframes laser-scan {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0.4;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(200%);
-    opacity: 0.2;
-  }
-}
-
-.tv-laser {
-  position: absolute;
-  bottom: 15%;
-  left: 0;
-  right: 0;
-  height: 2px;
   background: linear-gradient(
-    90deg,
-    rgba(255,0,0,0) 0%,
-    rgba(255,0,0,0.8) 50%,
-    rgba(255,0,0,0) 100%
+    45deg,
+    rgba(229, 9, 20, 0.1) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.3) 100%
   );
-  animation: laser-scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  z-index: 4;
-  pointer-events: none;
-  box-shadow: 0 0 20px rgba(255,0,0,0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.tv-laser::after {
-  content: "";
-  position: absolute;
-  right: -10px;
-  top: -3px;
-  width: 8px;
-  height: 8px;
-  background: #ff0000;
+.thumbnail:hover .thumbnail-hover-layer {
+  opacity: 1;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #000;
+  color: white;
+  gap: 1rem;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #e50914;
   border-radius: 50%;
-  filter: blur(1px);
+  animation: spin 1s linear infinite;
 }
 
-@keyframes led-blink {
-  0%, 100% {
-    opacity: 1;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
-  }
-  50% {
-    opacity: 0;
-    box-shadow: 0 0 2px rgba(255, 0, 0, 0.2);
-  }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-.tv-status-led {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ff0000;
-  animation: led-blink 0.5s linear infinite;
-  z-index: 5;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+/* Performance optimizations */
+.slide, .thumbnail {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  transform: translateZ(0);
 }
 
-.tv-status-led::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(255, 255, 255, 0.8),
-    transparent 70%
-  );
-  filter: blur(0.5px);
-}
-/* Mobile Styles */
+/* Responsive design */
 @media (max-width: 768px) {
-  .tv-screen {
-    min-width: 100%;
-    height: 300px;
-    border-radius: 4px;
-    animation: crt-flicker 0.15s infinite, mobile-scanline 4s linear infinite;
-  }
-
-  .tv-frame {
-    min-width: 100%;
-    height: 320px;
-    padding: 0.5rem;
-    border-radius: 12px;
-    transform: perspective(800px) rotateX(2deg);
-  }
-
-  .tv-frame::after {
-    width: 80px;
-    height: 30px;
-    bottom: -15px;
-    border-radius: 0 0 8px 8px;
-  }
-
-  .slide-image-container {
-    width: 95%;
-    height: 85%;
-    margin: 2% auto;
-  }
-
-  .slide-image {
-    border-radius: 2px;
-  }
-
-  .thumbnail-carousel {
-    height: 100px;
-    margin-top: 1rem;
-  }
-
-  .thumbnail {
-    width: 120px;
-    height: 80px;
-  }
-
-  .tv-laser {
-    height: 1px;
-    bottom: 12%;
-    animation: laser-scan 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
-
-  .tv-status-led {
-    width: 6px;
-    height: 6px;
-    bottom: 15px;
-  }
-
-  /* Adjust animations for mobile */
-  @keyframes mobile-scanline {
-    from { transform: translateY(-100%); }
-    to { transform: translateY(300%); }
-  }
-
-  /* Simplify hover effects for touch devices */
-  .slide:hover .movie-content,
-  .slide:hover .info-panel,
-  .thumbnail:hover {
-    transform: none;
-    filter: none;
-  }
-
-  .thumbnail:hover .thumbnail-info {
-    bottom: -100%;
-  }
-}
-/* Mobile Optimized Styles */
-@media (max-width: 768px) {
-  .movie-carousel {
-    height: 65vh;
-    min-height: 400px;
-    margin: 1rem auto;
-    border-radius: 8px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  }
-
   .main-display {
-    height: 50vh;
-    min-height: 300px;
+    height: 70vh;
   }
-
-  .slide {
-    transform: scale(0.96);
+  
+  .thumbnail-section {
+    height: 30vh;
   }
-
-  .movie-info {
-    bottom: 10%;
-    left: 5%;
-    right: 5%;
-    max-width: 100%;
-    padding: 1rem;
-    backdrop-filter: blur(2px);
-  }
-
-  .movie-title {
-    font-size: 1.8rem;
-    line-height: 1.2;
-    margin-bottom: 0.5rem;
-  }
-
-  .movie-description {
-    font-size: 0.9rem;
-    max-width: 100%;
-    line-height: 1.4;
-  }
-
-  .action-buttons {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .play-button, .info-button {
-    padding: 10px 18px;
-    font-size: 1rem;
-    border-radius: 6px;
-  }
-
-  .progress-container {
-    bottom: 1rem;
-  }
-
-  .progress-track {
-    width: 35px;
-    height: 3px;
-  }
-
-  .navigation-controls {
-    padding: 0 1rem;
-  }
-
-  .nav-button {
-    width: 40px;
-    height: 40px;
-    backdrop-filter: blur(2px);
-  }
-
-  .arrow {
-    font-size: 1.5rem;
-  }
-
-  /* Touch optimization */
-  .thumbnail-carousel {
-    height: 100px;
-    margin: 1rem 0;
-    padding: 0 1rem;
-    -webkit-overflow-scrolling: touch;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-  }
-
+  
   .thumbnail {
-    position: relative;
-    scroll-snap-align: center;
-    filter: brightness(0.9);
-    transform: none !important;
+    min-width: 100px;
+    height: 70px;
   }
-
-  .thumbnail-content {
-    width: 140px;
-    height: 80px;
+  
+  .carousel-controls {
+    padding: 0 1rem;
   }
-
-  .thumbnail-overlay {
-    display: none;
-  }
-
-  /* Disable hover states */
-  @media (hover: none) {
-    .slide:hover .slide-image,
-    .thumbnail:hover {
-      transform: none !important;
-      filter: none !important;
-    }
-    
-    .thumbnail:hover .thumbnail-overlay {
-      opacity: 0;
-    }
-  }
-
-  /* Performance optimizations */
-  .crt-overlay,
-  .tv-laser,
-  .tv-status-led {
-    display: none;
-  }
-
-  .tv-screen {
-    animation: none;
+  
+  .nav-button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
   }
 }
 
-/* Ultra Mobile (Portrait) */
-@media (max-width: 480px) and (orientation: portrait) {
-  .movie-carousel {
-    height: 55vh;
-    border-radius: 4px;
-  }
-
-  .movie-title {
-    font-size: 1.5rem;
-  }
-
-  .movie-description {
-    font-size: 0.85rem;
-  }
-
-  .progress-track {
-    width: 25px;
-  }
-
-  .nav-button {
-    width: 35px;
-    height: 35px;
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .slide-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
 }

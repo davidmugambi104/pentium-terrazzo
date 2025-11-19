@@ -2,23 +2,46 @@
 :root {
 --primary-gradient: linear-gradient(
   135deg,
-  #2A75B3 25%,
-  #2A75B3 40%,
-  #3AAFA9 60%,
-  #3AAFA9 75%,
-  #2A75B3 100%
+  #000000 25%,  /* deep black */
+  #330000 40%,  /* dark red transition */
+  #660000 60%,  /* richer red */
+  #990000 75%,  /* brighter red */
+  #330000 100%  /* final strong red */
 );
-
-
 
   --glass-bg: rgba(116, 234, 238, 0.95);
   --navlink-color: #010807;
+}
+/* Gradient text style */
+.gradient-text {
+  font-family: 'Montserrat', 'Poppins', sans-serif; /* pick one */
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 2.5rem; /* adjust for logo size */
+  background: linear-gradient(135deg, #2A75B3 25%, #3AAFA9 50%, #2A75B3 75%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  color: wheat;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+/* Optional: add a subtle shadow for depth */
+.gradient-text::after {
+  content: "®";
+  font-size: 0.5em;
+  vertical-align: super;
+  color: #fff; /* or match gradient */
+  margin-left: 2px;
 }
 
 /* Enhanced Header */
 .navbar-header {
   position: sticky;
   top: 0;
+  text-decoration: none;
   z-index: 1000;
   padding: 1rem 2rem;
   background: var(--primary-gradient);
@@ -41,24 +64,13 @@
   margin: 0 auto;
   position: relative;
 }
+.nav-blend-zone {
+  mix-blend-mode: normal;
+  isolation: isolate;   /* forces a new blending context */
+}
 
 /* Enlarged Brand */
-.navbar-brand .gradient-text {
-  font-size: 2.5rem; /* Increased size */
-  font-weight: 900;
-  letter-spacing: -1.5px;
-  background: #000;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  padding: 0.5rem 1rem;
-  transition: all 0.3s ease;
-}
 
-.navbar-brand:hover .gradient-text {
-  transform: scale(1.05);
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
 
 /* Left-aligned Navlinks */
 .desktop-nav {
@@ -70,13 +82,14 @@
 }
 
 .nav-link {
-  position: relative;
+  color: rgb(111, 216, 227);
+  mix-blend-mode: difference;
   text-decoration: none;
   padding: 0.8rem 1.2rem;
-  color: var(--navlink-color);
   font-weight: 600;
   transition: all 0.3s ease;
 }
+
 
 .link-hover::before {
   content: '';
